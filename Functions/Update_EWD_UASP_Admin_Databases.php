@@ -8,9 +8,6 @@ function Add_EWD_UASP_Appointment($Appointment_Start_Time, $Appointment_End_Time
 	global $EWD_UASP_Appointment_Add_Success;
 
 	$WooCommerce_Integration = get_option("EWD_UASP_WooCommerce_Integration");
-	$Allow_Paypal_Prepayment = get_option("EWD_UASP_Allow_Paypal_Prepayment");
-	$Possible_Delete_Appointments = get_option("EWD_UASP_Possible_Delete_Appointments");
-	if (!is_array($Possible_Delete_Appointments)) {$Possible_Delete_Appointments = array();}
 	
 	$wpdb->insert($ewd_usap_appointments_table_name,
 		array( 'Appointment_Start' => $Appointment_Start_Time,
@@ -33,11 +30,6 @@ function Add_EWD_UASP_Appointment($Appointment_Start_Time, $Appointment_End_Time
 	if ($WooCommerce_Integration == "Yes") {
 		$_SESSION['EWD_UASP_Appointment_ID'] = $wpdb->insert_id;
 		EWD_UASP_Add_WC_Appointment_Deletion($wpdb->insert_id);
-	}
-
-	if ($Allow_Paypal_Prepayment == "Required") {
-		$Possible_Delete_Appointments[$wpdb->insert_id] = time() + 60*20;
-		update_option("EWD_UASP_Possible_Delete_Appointments", $Possible_Delete_Appointments);
 	}
 
 	$update = __("Appointment has been successfully created.", 'ultimate-appointment-scheduling');
@@ -299,10 +291,6 @@ function Delete_EWD_UASP_Exception($Exception) {
 
 function EWD_UASP_UpdateOptions() {
 	global $EWD_UASP_Full_Version;
-
-	if ( ! isset( $_POST['EWD_UASP_Admin_Nonce'] ) ) {return;}
-
-    if ( ! wp_verify_nonce( $_POST['EWD_UASP_Admin_Nonce'], 'EWD_UASP_Admin_Nonce' ) ) {return;}
 
 	if ($_POST['woocommerce_integration'] == "Yes" and get_option("EWD_UASP_WooCommerce_Integration") == "No") {$Run_WC_Sync = "Yes";}
 	else {$Run_WC_Sync = "No";}

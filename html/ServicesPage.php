@@ -20,7 +20,7 @@
 	
 ?>
 
-<form action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_MassDeleteServices&DisplayPage=Services" method="post">   
+<form action="admin.php?page=EWD-UASP-options&Action=UPCP_MassDeleteServices&DisplayPage=Services" method="post">   
 <div class="tablenav top">
 		<div class="alignleft actions">
 				<select name='action'>
@@ -126,7 +126,7 @@
 <h3><?php _e("Add a New Service", 'ultimate-appointment-scheduling') ?></h3>
 <form id="addcat" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_AddService&DisplayPage=Services" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Add_Service" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 <div class="form-field form-required">
 	<label for="Service_Name"><?php _e("Name", 'ultimate-appointment-scheduling') ?></label>

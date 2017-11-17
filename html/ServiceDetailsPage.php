@@ -18,7 +18,7 @@
 <form id="addcat" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_EditService&DisplayPage=Services" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Edit_Service" />
 <input type="hidden" name="Service_ID" value="<?php echo $_GET['Service_ID']; ?>" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 <div class="form-field form-required">
 	<label for="Service_Name"><?php _e("Name", 'ultimate-appointment-scheduling') ?></label>

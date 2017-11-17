@@ -217,7 +217,7 @@
 
 <form id="addtag" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_AddAppointment&DisplayPage=Appointments" class="validate ewd-uasp-appointment-form" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Add_Appointment" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 
 <!--<div class='form-field'>

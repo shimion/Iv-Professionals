@@ -15,16 +15,14 @@ function EWD_UASP_Appointment_Confirmation($atts) {
 		)
 	);
 
-	$Custom_CSS_String = '<style>' . $Custom_CSS . '</style>';
-
 	$Email = $_GET['Email'];
 	$Appt_ID = $_GET['Appt_ID'];
 
 	$wpdb->get_results($wpdb->prepare("SELECT Appointment_ID FROM $ewd_usap_appointments_table_name WHERE Appointment_Client_Email=%s AND Appointment_ID=%d", $Email, $Appt_ID));
-	if ($wpdb->num_rows == 0) {return $Custom_CSS_String . $confirmation_failure_message;}
+	if ($wpdb->num_rows == 0) {return $confirmation_failure_message;}
 	
 	$wpdb->get_results($wpdb->prepare("UPDATE $ewd_usap_appointments_table_name SET Appointment_Confirmation_Received='Yes' WHERE Appointment_Client_Email=%s AND Appointment_ID=%d", $Email, $Appt_ID));
 
-	return $Custom_CSS_String . $confirmation_success_message;
+	return $confirmation_success_message;
 }
 add_shortcode("confirm-appointment", "EWD_UASP_Appointment_Confirmation");

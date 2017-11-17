@@ -1,4 +1,18 @@
 jQuery(document).ready(function() {
+    
+    function srtvicepv($v, $default){
+        if($v == 370){
+            return 376;
+        }else if($v == 369){
+             return 373;
+        }else if($v == 574){
+             return 575;
+        }else{
+        return $default;
+        }
+    }
+    
+    
 console.log(ajaxurl); console.log(ewd_uasp_php_calendar_data.timezone);
 	jQuery('#ewd-uasp-calendar').fullCalendar({
 		header: {
@@ -23,7 +37,7 @@ console.log(ajaxurl); console.log(ewd_uasp_php_calendar_data.timezone);
     	            end: end.unix(),
     	            location: jQuery('#ewd-uasp-das-location').val(),
     	            service: jQuery('#ewd-uasp-das-service').val(),
-    	            service_provider: jQuery('#ewd-uasp-das-service-provider').val()
+    	            service_provider: srtvicepv(jQuery('#ewd-uasp-das-location').val(), jQuery('#ewd-uasp-das-service-provider').val())
     	        },
     	        success: function(event_objects_json) {console.log(event_objects_json); 
     	        	event_objects = JSON.parse(event_objects_json);
@@ -47,7 +61,8 @@ console.log(ajaxurl); console.log(ewd_uasp_php_calendar_data.timezone);
         	
         	var Time = Date.parse(calEvent.start) / 1000;
         	var End_Time = Date.parse(calEvent.end) / 1000;
-        	var Service_Duration = jQuery('#ewd-uasp-das-service').find(':selected').data('serviceduration');
+        	console.log(End_Time);
+        	var Service_Duration = jQuery('#hiddenservice').data('serviceduration');
         	
         	jQuery('#ewd-uasp-time-select').data('date', calEvent.start);
         	jQuery('#ewd-uasp-time-select').data('provider', calEvent.provider);
@@ -58,7 +73,9 @@ console.log(ajaxurl); console.log(ewd_uasp_php_calendar_data.timezone);
 
        		while (Time < (End_Time - (Service_Duration*60))) { 
         		var Appointment_Time = new Date((Time + Offset_Seconds)*1000);
-        		jQuery('#ewd-uasp-time-select-input-div select').append('<option value="' + Time + '">' + ('0' + Appointment_Time.getHours()).slice(-2) + ":" + ('0' + Appointment_Time.getMinutes()).slice(-2) + '</option>');
+				
+				//console.log(Appointment_Time);
+        		jQuery('#ewd-uasp-time-select-input-div select').append('<option value="' + Time + '">' + ( Appointment_Time.toLocaleTimeString()) + '</option>');
         		Time += (ewd_uasp_php_calendar_data.time_interval * 60);
         	}
 

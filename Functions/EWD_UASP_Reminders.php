@@ -48,11 +48,11 @@ function EWD_UASP_Send_Email_Reminder($Appointment, $Reminder) {
 			$mail_success = wp_mail( $Appointment->Appointment_Client_Email, $Subject, $Message, $Headers);
 
 			$New_Appointment_Email_Reminders = $Appointment->Appointment_Reminder_Email_Sent . "," . $Reminder['ID'];
-			$wpdb->update(
-				$ewd_usap_appointments_table_name,
-				array( 'Appointment_Reminder_Email_Sent' => $New_Appointment_Email_Reminders),
-				array( 'Appointment_ID' => $Appointment->Appointment_ID)
-			);
+			//$wpdb->update(
+			//	$ewd_usap_appointments_table_name,
+			//	array( 'Appointment_Reminder_Email_Sent' => $New_Appointment_Email_Reminders),
+			//	array( 'Appointment_ID' => $Appointment->Appointment_ID)
+		//	);
 		}
 	}
 }

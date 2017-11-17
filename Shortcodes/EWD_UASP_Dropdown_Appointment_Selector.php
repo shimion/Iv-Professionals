@@ -4,9 +4,8 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 	global $woocommerce;
 	global $wpdb;
 	global $ewd_usap_appointments_table_name;
-
-	$Custom_CSS = get_option('EWD_UASP_Custom_CSS');
-	
+//	print_r($_REQUEST);
+	//wp_mail('shimionson@gmail.com', 'Debug IV', json_encode($_REQUEST));
 	$Default_Location_ID = get_option("EWD_UASP_Default_Location");
 	$Default_Service_ID = get_option("EWD_UASP_Default_Service");
 	$Default_Service_Provider_ID = get_option("EWD_UASP_Default_Service_Provider");
@@ -77,8 +76,6 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 		$atts
 		)
 	);
-
-	$ReturnString = '<style>' . $Custom_CSS . '</style>';
 	
 	if ($no_form != "Yes") {$Minimum_Date = date('Y-m-d',time()+$Minimum_Days_Advance*3600*24);}
 	else {$Minimum_Date = "";}
@@ -86,7 +83,19 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 	else {$Maximum_Date = "";}
 
 	if (isset($_POST['EWD_UASP_Appointment_Submit']) or isset($_POST['EWD_UASP_Appointment_Payment_Submit'])) {
+	    $serviceID =  $_POST['Location_ID'];
+	    if($serviceID == '369'){
+	        $pro = '422';
+	        }elseif($serviceID == '370'){
+	        $pro = '428';
+	        }elseif($serviceID == '574'){
+	         $pro = '644';   
+	   }
+	    if(!empty($pro) or $pro != '0'){
+	    $woocommerce->cart->add_to_cart($pro);
+	    }
 		$ewd_uasp_message = EWD_UASP_Add_Edit_Appointment();
+		$WooCommerce_Integration ='Yes';
 		if ($WooCommerce_Integration == "Yes" and isset($_POST['Service_ID']) and $ewd_uasp_message['Message_Type'] != 'Error') {
 			$Service_ID = sanitize_text_field($_POST['Service_ID']);
 			$args = array(
@@ -112,16 +121,16 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 		}
 	}
 
-	if ($ewd_uasp_message['Message'] == __("Appointment has been successfully created.", 'ultimate-appointment-scheduling') and !isset($_POST['EWD_UASP_Appointment_Payment_Submit']) and $redirect_page != '#') {header('location:'. $redirect_page);}
+	if ($ewd_uasp_message['Message'] == __("We have received your appointment request.", 'ultimate-appointment-scheduling') and !isset($_POST['EWD_UASP_Appointment_Payment_Submit']) and $redirect_page != '#') {header('location:'. $redirect_page);}
 
 	//Create form with link to pay for appointment
-	if (isset($_POST['EWD_UASP_Appointment_Payment_Submit'])) {$wpdb->show_errors();
+	if (isset($_POST['EWD_UASP_Appointment_Payment_Submit'])) {
 		$Selected_Appointment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ewd_usap_appointments_table_name WHERE Appointment_ID=%d", $wpdb->insert_id));
 		$Selected_Location = get_post($Selected_Appointment->Location_Post_ID);
 		$Selected_Service = get_post($Selected_Appointment->Service_Post_ID);
 		$Selected_Service_Provider = get_post($Selected_Appointment->Service_Provider_Post_ID);
 
-		$ReturnString .= "<div class='ewd-uasp-paypal-form'>";
+		$ReturnString = "<div class='ewd-uasp-paypal-form'>";
 		$ReturnString .= "<form action='https://www.paypal.com/cgi-bin/webscr' method='post' class='standard-form'>";
 		//$ReturnString .= "<form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post' class='standard-form'>";
         $ReturnString .= "<input type='hidden' name='item_name_1' value='" . $Selected_Service->post_title . "' />";
@@ -140,7 +149,7 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
     	//$ReturnString .= "<input type='hidden' name='cancel_return' value='" . ' />
     	$ReturnString .= "<input type='hidden' name='notify_url' value='" . get_site_url() . "' />";
  
-    	$ReturnString .= "<input type='submit' class='submit-button' value='" . $Proceed_To_Payment_Label . "' />";
+    	$ReturnString .= "<input type='submit' class='submit-button' value='$Proceed_To_Payment_Label' />";
 		$ReturnString .= "</form>";
 		$ReturnString .= "</div>";
 
@@ -208,8 +217,72 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 
 	if (isset($ewd_uasp_message['Message'])) {
 		$ReturnString .= "<div class='ewd-uasp-appointment-message ewd-uasp-" . $ewd_uasp_message['Message_Type'] . "'>";
-		$ReturnString .= $ewd_uasp_message['Message'];
+		$massage = !empty($ewd_uasp_message['Message']) ? $ewd_uasp_message['Message'] : __("We have received your appointment request.", 'ultimate-appointment-scheduling');
+		
+		$download_message = 'Please download and fill out our intake and consent forms before your technician arrives. You can upload your completed forms through your My Account page.';
+		
+		$ReturnString .= sprintf("<h2 class='ssc'>%s</h2>", $massage);
+		
+		$ReturnString .= sprintf("<p class='ssc'>%s</p>", $download_message);
+		
+		$Selected_Appointment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ewd_usap_appointments_table_name WHERE Appointment_ID=%d", $wpdb->insert_id));
+		$Selected_Location = get_post($Selected_Appointment->Location_Post_ID);
+		$Selected_Service = get_post($Selected_Appointment->Service_Post_ID);
+		$Selected_Service_Provider = get_post($Selected_Appointment->Service_Provider_Post_ID);
+	//	print_r($Selected_Location);
+     //   print $Selected_Location->ID;
+		$ReturnString .= "<div class='ewd-uasp-paypal-form'>";
+		//$ReturnString .= "<form action='https://www.paypal.com/cgi-bin/webscr' method='post' class='standard-form'>";
+		//$ReturnString .= "<form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post' class='standard-form'>";
+       // $ReturnString .= "<input type='hidden' name='item_name_1' value='" . $Selected_Service->post_title . "' />";
+       // $ReturnString .= "<input type='hidden' name='quantity_1' value='1' />";
+       // $ReturnString .= "<input type='hidden' name='amount_1' value='" . get_post_meta($Selected_Service->ID, 'Service Price', true) . "' />";
+ 	//	$ReturnString .= "<input type='hidden' name='custom' value='" . $Selected_Appointment->Appointment_ID . "' />";
+
+    //	$ReturnString .= "<input type='hidden' name='cmd' value='_cart' />";
+    //	$ReturnString .= "<input type='hidden' name='upload' value='1' />";
+    //	$ReturnString .= "<input type='hidden' name='business' value='" . $PayPal_Email_Address . "' />";
+ 
+    //	$ReturnString .= "<input type='hidden' name='currency_code' value='" . $Pricing_Currency_Code . "' />";
+    	//$ReturnString .= "<input type='hidden' name='lc' value='CA' />"
+    	//$ReturnString .= "<input type='hidden' name='rm' value='2' />";
+    //	$ReturnString .= "<input type='hidden' name='return' value='" . $Thank_You_URL . "' />";
+    	//$ReturnString .= "<input type='hidden' name='cancel_return' value='" . ' />
+    //	$ReturnString .= "<input type='hidden' name='notify_url' value='" . get_site_url() . "' />";
+ 
+    //	$ReturnString .= "<input type='submit' class='submit-button' value='$Proceed_To_Payment_Label' />";
+	//	$ReturnString .= "</form>";
+	   // if($Selected_Location->ID == '369'){
+	    //    $pro = '422';
+	    //    }elseif($Selected_Location->ID == '370'){
+	     //   $pro = '428';
+	   // }
+	   // $ReturnString .=                                                 //ipe_add_to_cart_link($pro, 428, $Proceed_To_Payment_Label);
+	   global $woocommerce;
+	   $cart_data = WC()->cart->cart_contents_count;
+	   if($cart_data != 0){
+	    $ReturnString .= "<a href='/checkout/' class='hr_button' product-id='$pro' style='text-align: center;display: inline-block;max-width: 300px;float: none;margin: 0 auto !important'>$Proceed_To_Payment_Label</a>";
+	    }
 		$ReturnString .= "</div>";
+		$no_form = 'Yes';
+	}
+	if ($no_form == "Yes") {
+$ReturnString .=	'<style>
+.ewd-uasp-das-registrationform-content, .ewd-uasp-das-findappointment{display: none;}
+.ssc{text-align: center; display: block;}
+ .ewd-uasp-das-container.ewd-uasp-das-service     , .title_bottom {display: none;}
+ 
+ a.button.hr_button {
+    display: block;
+    margin: 0 auto !important;
+    max-width: 300px;
+    float: none;
+    text-align: center;
+}
+#need_asap, div[data-id="7bj319c"]{display: none;}
+#scheduling_text_widget, div[data-id="jjubbh4"]{display: none;}
+#scheduling_title_widget, div[data-id="jjubbh4"]{display: none;}
+        </style>';
 	}
 
 	if ($no_form != "Yes") {
@@ -245,15 +318,86 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 	  	$ReturnString .= "</div>";
 		if ($Logged_In_User['Client_Email'] != "") {$ReturnString .= "<input name='Appointment_Client_Email' id='Appointment_Client_Email' type='email' value='" . $Logged_In_User['Client_Email'] . "' size='60' " . $Email_Required . " />" . $Logged_In_User['Client_Email'];}
 		else {$ReturnString .= "<input name='Appointment_Client_Email' class='ewd-uasp-das-select' id='Appointment_Client_Email' type='email' value='" . $Selected_Appointment->Appointment_Client_Email . "' size='60' " . $Email_Required . "/>";}
+		
+		        $ReturnString .= "<div class='ewd-uasp-das-field'>";
+        $ReturnString .= "<div class='ewd-uasp-das-input-label' style='margin-bottom: 0;'><label>";
+        $ReturnString .= $Location_Label;
+        $ReturnString .= "</label></div>";
+
+        $ReturnString .= "<select id='ewd-uasp-das-location' class='ewd-uasp-das-select' name='Location_ID' onchange='ClearAppointments();'>";
+        
+		foreach ($Locations as $Location) {
+		   //edit 11/2/2017 
+			//$ReturnString .= "<option value='" . $Location->ID . "' ";
+		//	if ($Location->ID == $Default_Location_ID) {
+		//	    $ReturnString .= "selected";
+			}
+		//	$ReturnString .= ">" . $Location->post_title . "</option>";
+	//	}
+	
+	       $ReturnString .= '<option value="369">White Zone</option><option value="370">Blue Zone</option><option value="574">Genesee Town Center</option>';
+	
+	
+	
+	
+		$ReturnString .= "</select>";
 		$ReturnString .= "</div>";
+
+		$ReturnString .= "</div>";
+        
+        
+//        $ReturnString .= "<div class='ewd-uasp-das-field'>";
+//        $ReturnString .= "<div class='ewd-uasp-das-input-label' style='margin-bottom: 0;'><label>";
+//        $ReturnString .= $Location_Label;
+//        $ReturnString .= "</label></div>";
+//        
+//        
+//        $ReturnString .= "<select id='ewd-uasp-das-location' class='ewd-uasp-das-select' name='Location_ID' onchange='ClearAppointments();'>";
+//		foreach ($Locations as $Location) {
+//			$ReturnString .= "<option value='" . $Location->ID . "' ";
+//			if ($Location->ID == $Default_Location_ID) {$ReturnString .= "selected";}
+//			$ReturnString .= ">" . $Location->post_title . "</option>";
+//		}
+//		$ReturnString .= "</select>";
+//        
+//        $ReturnString .= "</div>";
+       
+       
 	}
 	if ($Logged_In_User['Login_Status'] != "None") {$ReturnString .= $Logged_In_User['ManageLogin'];}
+    
+    
+    $ReturnString .= '<input type="hidden" id="ewd-uasp-das-service-provider" class="ewd-uasp-das-select" name="Service_Provider_ID" value="All">';
+     
+        
+    $ReturnString .= '<input type="hidden" id="ewd-uasp-das-service" class="ewd-uasp-das-select" name="Service_ID"  value="371">
+    ';
+    
+    $ServiceDuration = get_post_meta($Service[0]->ID, 'Service Duration', true);
+		$ReturnString .= "<input type='hidden' id='hiddenservice' name='Service_ID' value='" . $Services[0]->ID . "'  data-serviceduration='30' />";
+    
   	$ReturnString .= "</div>";
   	$ReturnString .= "</div>";
+	
+			$ReturnString .= "<div class='ewd-uasp-das-container ewd-uasp-das-service'>";
+		
+		$ReturnString .= "<a href='/wp-content/uploads/2017/11/IV-Professionals-Map-4.png'><img src='/wp-content/uploads/2017/11/IV-Professionals-Map-4-1.png' /></a><br><br>";
+		$ReturnString .= "
+<p class='hr_zone'><b>White Zone:</b> $50 concierge fee<br>
+<b>Blue Zone:</b> $75 concierge fee<br>
+<b>Genesee Town Center:</b> $50 reservation fee</p>
+
+<p class='hr_zone'><b>Note:</b> If you do not fall in the white or blue zones but are still interested in our services, please contact us directly. IV Professionals is also available by appointment at our location in the Genesee Town Center in the Golden Foothills.</p>
+<p class='hr_note'>Please provide us with the following information, and we'll be on our way!</p>";
+
+		
+				$ReturnString .= "</div>";
+
+
   /*Sign up - Ends here*/
 
   	/*Choose Service*/
-	$ReturnString .= "<div class='ewd-uasp-das-container ewd-uasp-das-service'>";
+	/*$ReturnString .= "<div class='ewd-uasp-das-container ewd-uasp-das-service'>";
   	if ($no_form != "Yes") {$ReturnString .= "<div class='ewd-uasp-das-title ewd-uasp-das-service-label'>" . $Service_Title_Label . "</div>";}
   	$ReturnString .= "<div class='ewd-uasp-das-service-content'>";
 	$ReturnString .= "<div class='ewd-uasp-das-field'>";
@@ -299,8 +443,8 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 		$ReturnString .= "</select>";
 	}
 	$ReturnString .= "</div>";
-	$ReturnString .= "</div>";
-	$ReturnString .= "<div class='clear'></div>";
+	$ReturnString .= "</div>";*/
+/*	$ReturnString .= "<div class='clear'></div>";
 
 	$ReturnString .= "<div class='ewd-uasp-das-field'>";
 	$ReturnString .= "<div class='ewd-uasp-das-input-label'>";
@@ -325,20 +469,21 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
   	$ReturnString .= "</div>";
   
 	$ReturnString .= "</div>";
-	$ReturnString .= "</div>";
+	$ReturnString .= "</div>";*/
 	$ReturnString .= "<div class='clear'></div>";
+
   
   	/*Find Appointment*/
-  	if ($display_type == 'Calendar') {
+  	if ($display_type == 'Calendar' && $no_form != 'Yes') {
   		$ReturnString .= "<div id='ewd-uasp-calendar'></div>";
   		$ReturnString .= "<input type='hidden' name='Appointment_Start' id='ewd-uasp-selected-appointment-time' />";
   		$ReturnString .= "<div id='ewd-uasp-screen-background' class='ewd-uasp-hidden'></div>";
   		$ReturnString .= "<div id='ewd-uasp-time-select' class='ewd-uasp-hidden'>";
   		$ReturnString .= "<div id='ewd-uasp-time-location'></div>";
-  		$ReturnString .= "<div id='ewd-uasp-time-service'></div>";
-  		$ReturnString .= "<div id='ewd-uasp-time-service-provider'></div>";
+  	//	$ReturnString .= "<div id='ewd-uasp-time-service'></div>";
+  $ReturnString .= "<div id='ewd-uasp-time-service-provider'></div>";
   		$ReturnString .= "<div id='ewd-uasp-time-select-input-div'>";
-  		$ReturnString .= "<select name='time-select-input'></select>";
+  	$ReturnString .= "<select name='time-select-input'></select>";
   		$ReturnString .= "</div>";
   		$ReturnString .= "<div id='ewd-uasp-select-time-button'>Select Time</div>";
   		$ReturnString .= "</div>";
@@ -369,7 +514,7 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
 		$ReturnString .= "<div class='clear'></div>";
 
 		$ReturnString .= "<div id='ewd-uasp-das-appointment-times'>";
-		if ($selected_appointment_id != "") {$ReturnString .= EWD_UASP_Get_Appointments_Times($selected_location_id, $selected_service_id, $selected_service_provider_id, $selected_appointment_date, $selected_appointment_id);}
+		if ($selected_appointment_id != "") {$ReturnString .= EWD_UASP_Get_Appointments_Times(373, 371, 421, 575, $selected_appointment_date, $selected_appointment_id);}
 		$ReturnString .= "</div>";
   		$ReturnString .= "</div>";
   		$ReturnString .= "</div>";
@@ -378,10 +523,11 @@ function EWD_UASP_Dropdown_Appointment_Selector($atts) {
   	$ReturnString .= "<div class='ewd-uasp-das-book-button-container'>"; 
   	if ($Add_Captcha == "Yes") {$ReturnString .= EWD_UASP_Add_Captcha();}
   	if ($no_form != "Yes") {
-		if ($Allow_Paypal_Prepayment == "Required" or $Allow_Paypal_Prepayment == "Optional") {$ReturnString .= "<input type='submit' class='ewd-uasp-das-book-button' name='EWD_UASP_Appointment_Payment_Submit' value='" . $Pay_In_Advance_Label . "' />";}
+		if ($Allow_Paypal_Prepayment == "Required" or $Allow_Paypal_Prepayment == "Optional") {}
   		if ($Allow_Paypal_Prepayment == "Optional" or $Allow_Paypal_Prepayment == "No") {$ReturnString .= "<input type='submit' class='ewd-uasp-das-book-button' name='EWD_UASP_Appointment_Submit' value='" . $Book_Appointment_Label . "' />";}
   	}
   	$ReturnStrong .= "</div>";
+	$ReturnString .= "<h3 class='title_bottom'>Book as a group of three or more and save!</h3>";
 	$ReturnString .= "</form>";
   
 	$ReturnString .= "</div>";

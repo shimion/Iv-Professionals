@@ -15,7 +15,7 @@ function Update_EWD_UASP_Content() {
 			case "EWD_UASP_DeleteAppointment":
 				$ewd_uasp_message = Delete_EWD_UASP_Appointment($_GET['Appointment_ID']);
 				break;
-			case "EWD_UASP_MassDeleteAppointments":
+			case "EWD_UASP_MassDeleteAppointment":
        			$ewd_uasp_message = EWD_UASP_Mass_Delete_Appointments();
 				break;
 			case "EWD_UASP_AddLocation":
@@ -25,7 +25,7 @@ function Update_EWD_UASP_Content() {
 			case "EWD_UASP_DeleteLocation":
        			$ewd_uasp_message = Delete_EWD_UASP_Location($_GET['Location_ID']);
 				break;
-			case "EWD_UASP_MassDeleteLocations":
+			case "EWD_UASP_MassDeleteLocation":
        			$ewd_uasp_message = EWD_UASP_Mass_Delete_Locations();
 				break;
 			case "EWD_UASP_AddService":
@@ -35,7 +35,7 @@ function Update_EWD_UASP_Content() {
 			case "EWD_UASP_DeleteService":
        			$ewd_uasp_message = Delete_EWD_UASP_Service($_GET['Service_ID']);
 				break;
-			case "EWD_UASP_MassDeleteServices":
+			case "EWD_UASP_MassDeleteService":
        			$ewd_uasp_message = EWD_UASP_Mass_Delete_Services();
 				break;
 			case "EWD_UASP_AddServiceProvider":
@@ -45,7 +45,7 @@ function Update_EWD_UASP_Content() {
 			case "EWD_UASP_DeleteServiceProvider":
        			$ewd_uasp_message = Delete_EWD_UASP_Service_Provider($_GET['Service_Provider_ID']);
 				break;
-			case "EWD_UASP_MassDeleteServiceProviders":
+			case "EWD_UASP_MassDeleteServiceProvider":
        			$ewd_uasp_message = EWD_UASP_Mass_Delete_Service_Providers();
 				break;
 			case "EWD_UASP_AddException":
@@ -55,7 +55,7 @@ function Update_EWD_UASP_Content() {
 			case "EWD_UASP_DeleteException":
        			$ewd_uasp_message = Delete_EWD_UASP_Exception($_GET['Exception_ID']);
 				break;
-			case "EWD_UASP_MassDeleteExceptions":
+			case "EWD_UASP_MassDeleteException":
        			$ewd_uasp_message = EWD_UASP_Mass_Delete_Exceptions();
 				break;
 			case "EWD_UASP_UpdateOptions":

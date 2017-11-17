@@ -13,7 +13,7 @@
 <form id="addtag" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_EditAppointment&DisplayPage=Appointments" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Edit_Appointment" />
 <input type="hidden" name="Appointment_ID" value="<?php echo $_GET['Appointment_ID']; ?>" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 
 <?php 

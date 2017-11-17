@@ -220,7 +220,7 @@
 <h3><?php _e("Add New Exception", 'ultimate-appointment-scheduling') ?></h3>
 <form id="addtag" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_AddException&DisplayPage=Exceptions" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Add_Exception" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 
 <div class="form-field">

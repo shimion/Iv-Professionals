@@ -8,7 +8,14 @@ function EWD_UASP_AJAX_Get_Events() {
 
 	$Location = $_GET['location'];
 	$Service = $_GET['service'];
-	$Service_Provider = $_GET['service_provider'];
+	 if($Location == '370'){
+       $Service_Provider = 421;
+        }elseif($Location == '369'){
+        $Service_Provider = 373;
+        }else{
+        $Service_Provider = $_POST['Service_Provider'];
+        
+        }
 	$Start_Date = $_GET['start'];
 	$End_Date = $_GET['end'];
 
@@ -24,7 +31,15 @@ add_action( 'wp_ajax_nopriv_uasp_get_events', 'EWD_UASP_AJAX_Get_Events');
 function EWD_UASP_AJAX_Get_Appointment_Times() {
 	$Location = $_POST['Location'];
 	$Service = $_POST['Service'];
-	$Service_Provider = $_POST['Service_Provider'];
+    if($Location == '370'){
+       $Service_Provider = 421;
+        }elseif($Location == '369'){
+        $Service_Provider = 373;
+        }else{
+        $Service_Provider = $_POST['Service_Provider'];
+        
+        }
+	
 	$Date = $_POST['Date'];
 
 	echo EWD_UASP_Get_Appointments_Times($Location, $Service, $Service_Provider, $Date);
@@ -37,7 +52,18 @@ function EWD_UASP_AJAX_Update_Dropdowns() {
 	$Location = $_POST['Location'];
 	$Service = $_POST['Service'];
 
-	echo EWD_UASP_Get_Service_Providers($Location, $Service);
+    if($Location == '370'){
+       echo 421;
+        }elseif($Location == '369'){
+         echo 373;
+        
+        }else{
+        echo EWD_UASP_Get_Service_Providers($Location, $Service);
+        
+        }
+    
+
+	
 	wp_die();
 }
 add_action('wp_ajax_uasp_get_service_providers', 'EWD_UASP_AJAX_Update_Dropdowns');
@@ -66,7 +92,10 @@ function EWD_UASP_Get_Service_Providers($Location, $Service) {
 		'post_type' => 'uasp-provider'
 	);
 	$Service_Providers = get_posts($params);
-
+	
+	
+	
+	
 	if (sizeof($Service_Providers) == 1) {
 		$ReturnString .= "<input type='hidden' id='ewd-uasp-das-service-provider' name='Service_Provider_ID' value='" . $Service_Providers[0]->ID . "' />";
 		$ReturnString .= $Service_Providers[0]->post_title;

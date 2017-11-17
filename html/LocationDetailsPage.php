@@ -1,3 +1,7 @@
+<div id="col-right">
+<div class="col-wrap">
+
+
 <!-- Display a list of the categories which have already been created -->
 <?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
@@ -46,7 +50,7 @@
 <form id="addcat" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_EditLocation&DisplayPage=Locations" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Edit_Location" />
 <input type="hidden" name="Location_ID" value="<?php echo $_GET['Location_ID']; ?>" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 <div class="form-field form-required">
 	<label for="Location_Name"><?php _e("Name", 'ultimate-appointment-scheduling') ?></label>
@@ -62,7 +66,7 @@
 <table>
 	<thead>
 		<tr>
-			<!--<th><?php _e("Open?", 'ultimate-appointment-scheduling'); ?></th>-->
+			<th><?php _e("Open?", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Day", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Open", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Close", 'ultimate-appointment-scheduling'); ?></th>
@@ -71,49 +75,49 @@
 	</thead>
 	<tbody>
 		<tr>
-			<!--<td><input type='checkbox' name='Monday_Open_Toggle' value='Yes' <?php if ($Monday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Monday_Open_Toggle' value='Yes' <?php if ($Monday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Monday_Open_Toggle'>Monday</label></td>
 			<td><select name='Monday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Monday_Open) ?></select></td>
 			<td><select name='Monday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Monday_Close) ?></select></td>
 			<td><input type='text' name='Monday_Note' value='<?php echo $Monday_Note; ?>' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Tuesday_Open_Toggle' value='Yes' <?php if ($Tuesday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Tuesday_Open_Toggle' value='Yes' <?php if ($Tuesday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Tuesday_Open_Toggle'>Tuesday</label></td>
 			<td><select name='Tuesday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Tuesday_Open) ?></select></td>
 			<td><select name='Tuesday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Tuesday_Close) ?></select></td>
 			<td><input type='text' name='Tuesday_Note' value='<?php echo $Tuesday_Note; ?>' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Wednesday_Open_Toggle' value='Yes' <?php if ($Wednesday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Wednesday_Open_Toggle' value='Yes' <?php if ($Wednesday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Wednesday_Open_Toggle'>Wednesday</label></td>
 			<td><select name='Wednesday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Wednesday_Open) ?></select></td>
 			<td><select name='Wednesday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Wednesday_Close) ?></select></td>
 			<td><input type='text' name='Wednesday_Note' value='<?php echo $Wednesday_Note; ?>' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Thursday_Open_Toggle' value='Yes' <?php if ($Thursday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Thursday_Open_Toggle' value='Yes' <?php if ($Thursday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Thursday_Open_Toggle'>Thursday</label></td>
 			<td><select name='Thursday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Thursday_Open) ?></select></td>
 			<td><select name='Thursday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Thursday_Close) ?></select></td>
 			<td><input type='text' name='Thursday_Note' value='<?php echo $Thursday_Note; ?>' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Friday_Open_Toggle' value='Yes' <?php if ($Friday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Friday_Open_Toggle' value='Yes' <?php if ($Friday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Friday_Open_Toggle'>Friday</label></td>
 			<td><select name='Friday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Friday_Open) ?></select></td>
 			<td><select name='Friday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Friday_Close) ?></select></td>
 			<td><input type='text' name='Friday_Note' value='<?php echo $Friday_Note; ?>' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Saturday_Open_Toggle' value='Yes' <?php if ($Saturday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Saturday_Open_Toggle' value='Yes' <?php if ($Saturday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Saturday_Open_Toggle'>Saturday</label></td>
 			<td><select name='Saturday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Saturday_Open) ?></select></td>
 			<td><select name='Saturday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Saturday_Close) ?></select></td>
 			<td><input type='text' name='Saturday_Note' value='<?php echo $Saturday_Note; ?>' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Sunday_Open_Toggle' value='Yes' <?php if ($Sunday_Open != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Sunday_Open_Toggle' value='Yes' <?php if ($Sunday_Open != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Sunday_Open_Toggle'>Sunday</label></td>
 			<td><select name='Sunday_Open_Time'><?php EWD_UASP_Return_Select_Hours($Sunday_Open) ?></select></td>
 			<td><select name='Sunday_Close_Time'><?php EWD_UASP_Return_Select_Hours($Sunday_Close) ?></select></td>
@@ -125,4 +129,36 @@
 <p class="submit"><input type="submit" name="submit" id="submit" class="button-primary" value="<?php _e('Edit Location', 'ultimate-appointment-scheduling') ?>"  /></p></form></div>
 <br class="clear" />
 </div>
-</div>		
+</div>
+
+
+	<!--<form method="get" action=""><table style="display: none"><tbody id="inlineedit">
+		<tr id="inline-edit" class="inline-edit-row" style="display: none"><td colspan="4" class="colspanchange">
+
+			<fieldset><div class="inline-edit-col">
+				<h4>Quick Edit</h4>
+
+				<label>
+					<span class="title">Name</span>
+					<span class="input-text-wrap"><input type="text" name="name" class="ptitle" value="" /></span>
+				</label>
+					<label>
+					<span class="title">Slug</span>
+					<span class="input-text-wrap"><input type="text" name="slug" class="ptitle" value="" /></span>
+				</label>
+				</div></fieldset>
+	
+		<p class="inline-edit-save submit">
+			<a accesskey="c" href="#inline-edit" title="Cancel" class="cancel button-secondary alignleft">Cancel</a>
+						<a accesskey="s" href="#inline-edit" title="Update Level" class="save button-primary alignright">Update Level</a>
+			<img class="waiting" style="display:none;" src="<?php echo ABSPATH . 'wp-admin/images/wpspin_light.gif'?>" alt="" />
+			<span class="error" style="display:none;"></span>
+			<input type="hidden" id="_inline_edit" name="_inline_edit" value="fb59c3f3d1" />			<input type="hidden" name="taxonomy" value="wmlevel" />
+			<input type="hidden" name="post_type" value="post" />
+			<br class="clear" />
+		</p>
+		</td></tr>
+		</tbody></table></form>-->
+		
+<!--</div>-->
+		

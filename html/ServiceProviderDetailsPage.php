@@ -45,7 +45,7 @@
 <form id="addcat" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_EditServiceProvider&DisplayPage=ServiceProviders" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Edit_Service_Provider" />
 <input type="hidden" name="Service_Provider_ID" value="<?php echo $Service_Provider_ID; ?>" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 <div class="form-field form-required">
 	<label for="Service_Provider_Name"><?php _e("Name", 'ultimate-appointment-scheduling') ?></label>
@@ -93,7 +93,7 @@
 <table>
 	<thead>
 		<tr>
-			<!--<th><?php _e("Working?", 'ultimate-appointment-scheduling'); ?></th>-->
+			<th><?php _e("Working?", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Day", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Location", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Start", 'ultimate-appointment-scheduling'); ?></th>
@@ -102,7 +102,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<!--<td><input type='checkbox' name='Monday_Working_Toggle' value='Yes' <?php if ($Monday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Monday_Working_Toggle' value='Yes' <?php if ($Monday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Monday_Working_Toggle'>Monday</label></td>
 			<td>
 				<select name="Monday_Location_ID" id="Monday_Location_Name">
@@ -117,7 +117,7 @@
 			<td><select name='Monday_Finish_Time'><?php EWD_UASP_Return_Select_Hours($Monday_Finish, "Provider") ?></select></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Tuesday_Working_Toggle' value='Yes' <?php if ($Tuesday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Tuesday_Working_Toggle' value='Yes' <?php if ($Tuesday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Tuesday_Working_Toggle'>Tuesday</label></td>
 			<td>
 				<select name="Tuesday_Location_ID" id="Tuesday_Location_Name">
@@ -132,7 +132,7 @@
 			<td><select name='Tuesday_Finish_Time'><?php EWD_UASP_Return_Select_Hours($Tuesday_Finish, "Provider") ?></select></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Wednesday_Working_Toggle' value='Yes' <?php if ($Wednesday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Wednesday_Working_Toggle' value='Yes' <?php if ($Wednesday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Wednesday_Working_Toggle'>Wednesday</label></td>
 			<td>
 				<select name="Wednesday_Location_ID" id="Wednesday_Location_Name">
@@ -147,7 +147,7 @@
 			<td><select name='Wednesday_Finish_Time'><?php EWD_UASP_Return_Select_Hours($Wednesday_Finish, "Provider") ?></select></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Thursday_Working_Toggle' value='Yes' <?php if ($Thursday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Thursday_Working_Toggle' value='Yes' <?php if ($Thursday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Thursday_Working_Toggle'>Thursday</label></td>
 			<td>
 				<select name="Thursday_Location_ID" id="Thursday_Location_Name">
@@ -162,7 +162,7 @@
 			<td><select name='Thursday_Finish_Time'><?php EWD_UASP_Return_Select_Hours($Thursday_Finish, "Provider") ?></select></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Friday_Working_Toggle' value='Yes' <?php if ($Friday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Friday_Working_Toggle' value='Yes' <?php if ($Friday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Friday_Working_Toggle'>Friday</label></td>
 			<td>
 				<select name="Friday_Location_ID" id="Friday_Location_Name">
@@ -177,7 +177,7 @@
 			<td><select name='Friday_Finish_Time'><?php EWD_UASP_Return_Select_Hours($Friday_Finish, "Provider") ?></select></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Saturday_Working_Toggle' value='Yes' <?php if ($Saturday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Saturday_Working_Toggle' value='Yes' <?php if ($Saturday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Saturday_Working_Toggle'>Saturday</label></td>
 			<td>
 				<select name="Saturday_Location_ID" id="Saturday_Location_Name">
@@ -192,7 +192,7 @@
 			<td><select name='Saturday_Finish_Time'><?php EWD_UASP_Return_Select_Hours($Saturday_Finish, "Provider") ?></select></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Sunday_Working_Toggle' value='Yes' <?php if ($Sunday_Start != "24:00"){echo "checked";} ?> /></td>-->
+			<td><input type='checkbox' name='Sunday_Working_Toggle' value='Yes' <?php if ($Sunday_Start != "24:00"){echo "checked";} ?> /></td>
 			<td><label for='Sunday_Working_Toggle'>Sunday</label></td>
 			<td>
 				<select name="Sunday_Location_ID" id="Sunday_Location_Name">

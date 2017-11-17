@@ -2,7 +2,7 @@
 Contributors: Rustaurius, EtoileWebDesign
 Tags: appointment booking, appointment scheduling, meeting booking, booking, consultation, dates, session, quote, woocommerce appointments, scheduling, woocommerce services
 Requires at least: 3.9
-Tested up to: 4.9
+Tested up to: 4.8
 License: GPLv3
 License URI:http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -68,17 +68,6 @@ Try adding the shortcode [ultimate-appointment-dropdown] to whatever page you'd 
 6. The "Options" admin tab
 
 == Changelog ==
-= 0.26 =
-- For sites where payment is set to "Required", appointments that aren't paid within the next 20 minutes will be automatically deleted
-- Fixed an error where PayPal payments weren't working on some sites
-
-= 0.25 =
-- Fixed an error where some styling options weren't saving or weren't being applied
-
-= 0.24 =
-- Added nonces to a few forms that were missing them
-- Fixed a number of deleting/saving errors
-
 = 0.23 =
 - Added in option to set the default location, service, service provider and date via URL parameters
 - Added in 2 new labelling options

@@ -2,10 +2,6 @@
 /* Prepare the data to add or edit a single appointment */
 function EWD_UASP_Add_Edit_Appointment() {
 	global $wpdb;
-	
-	if ( ! isset( $_POST['EWD_UASP_Admin_Nonce'] ) and $_POST['action'] != "EWD_UASP_AddAppointment") {return;}
-
-    if ( ! wp_verify_nonce( $_POST['EWD_UASP_Admin_Nonce'], 'EWD_UASP_Admin_Nonce' ) and $_POST['action'] != "EWD_UASP_AddAppointment") {return;}
 
 	$Client_Email_Details = get_option("EWD_UASP_Client_Email_Details");
 
@@ -75,7 +71,7 @@ function EWD_UASP_Add_Edit_Appointment() {
 }
 
 function EWD_UASP_Mass_Delete_Appointments() {
-	$Appts = $_POST['Appointments_Bulk'];
+	$Appts = $_POST['Appts_Bulk'];
 	
 	if (is_array($Appts)) {
 		foreach ($Appts as $Appt) {
@@ -117,9 +113,6 @@ function EWD_UASP_Send_Appointment_Notification($Recipient, $Email_ID) {
 
 /* Prepare the data to add or edit a single location */
 function EWD_UASP_Add_Edit_Location() {
-	if ( ! isset( $_POST['EWD_UASP_Admin_Nonce'] ) ) {return;}
-
-    if ( ! wp_verify_nonce( $_POST['EWD_UASP_Admin_Nonce'], 'EWD_UASP_Admin_Nonce' ) ) {return;}
 
 	/* Process the $_POST data where neccessary before storage */
 	if (isset($_POST['Location_ID'])) {$Location_ID = $_POST['Location_ID'];}
@@ -191,9 +184,6 @@ function EWD_UASP_Mass_Delete_Locations() {
 
 /* Prepare the data to add or edit a single service */
 function EWD_UASP_Add_Edit_Service() {
-	if ( ! isset( $_POST['EWD_UASP_Admin_Nonce'] ) ) {return;}
-
-    if ( ! wp_verify_nonce( $_POST['EWD_UASP_Admin_Nonce'], 'EWD_UASP_Admin_Nonce' ) ) {return;}
 
 	/* Process the $_POST data where neccessary before storage */
 	if (isset($_POST['Service_ID'])) {$Service_ID = $_POST['Service_ID'];}
@@ -240,9 +230,6 @@ function EWD_UASP_Mass_Delete_Services() {
 
 /* Prepare the data to add or edit a single service provider */
 function EWD_UASP_Add_Edit_Service_Provider() {
-	if ( ! isset( $_POST['EWD_UASP_Admin_Nonce'] ) ) {return;}
-
-    if ( ! wp_verify_nonce( $_POST['EWD_UASP_Admin_Nonce'], 'EWD_UASP_Admin_Nonce' ) ) {return;}
 
 	/* Process the $_POST data where neccessary before storage */
 	if (isset($_POST['Service_Provider_ID'])) {$Service_Provider_ID = $_POST['Service_Provider_ID'];}
@@ -316,9 +303,6 @@ function EWD_UASP_Mass_Delete_Service_Providers() {
 }
 
 function EWD_UASP_Add_Edit_Exception() {
-	if ( ! isset( $_POST['EWD_UASP_Admin_Nonce'] ) ) {return;}
-
-    if ( ! wp_verify_nonce( $_POST['EWD_UASP_Admin_Nonce'], 'EWD_UASP_Admin_Nonce' ) ) {return;}
 
 	/* Process the $_POST data where neccessary before storage */
 	if (isset($_POST['Exception_ID'])) {$Exception_ID = $_POST['Exception_ID'];}

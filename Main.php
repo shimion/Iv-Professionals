@@ -2,12 +2,12 @@
 /*
 Plugin Name: Ultimate Appointment Scheduling
 Plugin URI: http://www.EtoileWebDesign.com/wordpress-plugins/
-Description: A plugin that lets you schedule appointments, sync with Google calendar, send out automated reminders, etc.
+Description: (This Plugin is customized Based on needed. Edited version is 0.23)A plugin that lets you schedule appointments, sync with Google calendar, send out automated reminders, etc.
 Author: Tim Ruse
 Author URI: http://www.EtoileWebDesign.com/wordpress-plugins/
 Terms and Conditions: http://www.etoilewebdesign.com/plugin-terms-and-conditions/
 Text Domain: ultimate-appointment-scheduling
-Version: 0.26
+Version: 10
 */
 
 global $ewd_uasp_message;
@@ -153,30 +153,6 @@ function EWD_UASP_Start_Session() {
 	if (!session_id()) {session_start();}
 }
 add_action('init', 'EWD_UASP_Start_Session', 1);
-
-function EWD_UASP_Delete_Unpaid_Appointments() {
-	global $wpdb;
-	global $ewd_usap_appointments_table_name;
-
-	$Allow_Paypal_Prepayment = get_option("EWD_UASP_Allow_Paypal_Prepayment");
-	$Possible_Delete_Appointments = get_option("EWD_UASP_Possible_Delete_Appointments");
-
-	if ($Allow_Paypal_Prepayment != "Required" or !is_array($Possible_Delete_Appointments)) {return;}
-
-	foreach ($Possible_Delete_Appointments as $Appointment_ID => $Delete_Time) {
-		if (time() > $Delete_Time) {
-			$Appointment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ewd_usap_appointments_table_name WHERE Appointment_ID=%d", $Appointment_ID));
-
-			if ($Appointment->Appointment_Prepaid != "Yes" and $Appointment->WC_Order_Paid != "Yes") {
-				$wpdb->query($wpdb->prepare("DELETE FROM $ewd_usap_appointments_table_name WHERE Appointment_ID=%d", $Appointment_ID));
-			}
-
-			unset($Possible_Delete_Appointments[$Appointment_ID]);
-		}
-	}
-	update_option("EWD_UASP_Possible_Delete_Appointments", $Possible_Delete_Appointments);
-}
-add_action('init', 'EWD_UASP_Delete_Unpaid_Appointments');
 
 $EWD_UASP_Full_Version = get_option("EWD_UASP_Full_Version");
 

@@ -19,7 +19,7 @@
 	$Locations = get_posts($params);
 ?>
 
-<form action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_MassDeleteLocations&DisplayPage=Locations" method="post">   
+<form action="admin.php?page=EWD-UASP-options&Action=UASP_MassDeleteLocations&DisplayPage=Locations" method="post">   
 <div class="tablenav top">
 		<div class="alignleft actions">
 				<select name='action'>
@@ -125,7 +125,7 @@
 <h3><?php _e("Add a New Location", 'ultimate-appointment-scheduling') ?></h3>
 <form id="addcat" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_AddLocation&DisplayPage=Locations" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Add_Location" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 <div class="form-field form-required">
 	<label for="Location_Name"><?php _e("Name", 'ultimate-appointment-scheduling') ?></label>
@@ -141,7 +141,7 @@
 <table>
 	<thead>
 		<tr>
-			<!--<th><?php _e("Open?", 'ultimate-appointment-scheduling'); ?></th>-->
+			<th><?php _e("Open?", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Day", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Open", 'ultimate-appointment-scheduling'); ?></th>
 			<th><?php _e("Close", 'ultimate-appointment-scheduling'); ?></th>
@@ -150,49 +150,49 @@
 	</thead>
 	<tbody>
 		<tr>
-			<!--<td><input type='checkbox' name='Monday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Monday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Monday_Open_Toggle'>Monday</label></td>
 			<td><select name='Monday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Monday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><input type='text' name='Monday_Note' value='' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Tuesday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Tuesday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Tuesday_Open_Toggle'>Tuesday</label></td>
 			<td><select name='Tuesday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Tuesday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><input type='text' name='Tuesday_Note' value='' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Wednesday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Wednesday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Wednesday_Open_Toggle'>Wednesday</label></td>
 			<td><select name='Wednesday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Wednesday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><input type='text' name='Wednesday_Note' value='' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Thursday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Thursday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Thursday_Open_Toggle'>Thursday</label></td>
 			<td><select name='Thursday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Thursday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><input type='text' name='Thursday_Note' value='' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Friday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Friday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Friday_Open_Toggle'>Friday</label></td>
 			<td><select name='Friday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Friday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><input type='text' name='Friday_Note' value='' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Saturday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Saturday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Saturday_Open_Toggle'>Saturday</label></td>
 			<td><select name='Saturday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Saturday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><input type='text' name='Saturday_Note' value='' /></td>
 		</tr>
 		<tr>
-			<!--<td><input type='checkbox' name='Sunday_Open_Toggle' value='Yes' /></td>-->
+			<td><input type='checkbox' name='Sunday_Open_Toggle' value='Yes' /></td>
 			<td><label for='Sunday_Open_Toggle'>Sunday</label></td>
 			<td><select name='Sunday_Open_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>
 			<td><select name='Sunday_Close_Time'><?php EWD_UASP_Return_Select_Hours() ?></select></td>

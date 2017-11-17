@@ -25,6 +25,9 @@ function UASP_AJAX_DAS_Get_Appointments() {
     var Selected_Location = jQuery('#ewd-uasp-das-location').val();
     var Selected_Service = jQuery('#ewd-uasp-das-service').val();
     var Selected_Service_Provider = jQuery('#ewd-uasp-das-service-provider').val();
+    if(!Selected_Service_Provider){
+    Selected_Service_Provider = 376
+    }
     var Selected_Date = jQuery('#ewd-uasp-das-date').val();
 
     jQuery('#ufaq-ajax-results').html('<h3>Retrieving available appointments...</h3>');

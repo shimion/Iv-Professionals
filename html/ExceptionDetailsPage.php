@@ -11,13 +11,12 @@
 <h2><?php _e("Edit Exception", 'ultimate-appointment-scheduling') ?></h2>
 <form id="addtag" method="post" action="admin.php?page=EWD-UASP-options&Action=EWD_UASP_EditException&DisplayPage=Exceptions" class="validate" enctype="multipart/form-data">
 <input type="hidden" name="action" value="Edit_Exception" />
-<input type="hidden" name="Exception_ID" value="<?php echo $Exception->Exception_ID; ?>" />
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
+<?php wp_nonce_field(); ?>
 <?php wp_referer_field(); ?>
 
 <div class="form-field">
 	<label for="Location_Name"><?php _e("Location:", 'ultimate-appointment-scheduling') ?></label>
-	<select name="Location_ID" id="Location_Name">
+	<select name="Location_Name" id="Location_Name">
 		<option value=''></option>
 	<?php 
 		$params = array(
@@ -38,12 +37,12 @@
 </div>
 <div class="form-field">
 	<label for="Service_Provider_Name"><?php _e("Service Provider:", 'ultimate-appointment-scheduling') ?></label>
-	<select name="Service_Provider_ID" id="Service_Provider_Name">
+	<select name="Service_Provider_Name" id="Service_Provider_Name">
 		<option value=''></option>
 	<?php 
 		$params = array(
 			'posts_per_page' => -1, 
-			'post_type' => 'uasp-provider'
+			'post_type' => 'uasp-service-provider'
 		);
 		$Service_Providers = get_posts($params);
 	?>
@@ -78,7 +77,7 @@
 	<input name="Exception_Reason" id="Exception_Reason" type="text" value="<?php echo $Exception->Exception_Reason;?>" size="60" />
 	<p><?php _e("The reason for the exception (if you'd like it to be displayed).", 'ultimate-appointment-scheduling') ?></p>
 </div>
-<p class="submit"><input type="submit" name="submit" id="submit" class="button-primary" value="<?php _e('Edit Exception', 'ultimate-appointment-scheduling') ?>"  /></p></form>
+<p class="submit"><input type="submit" name="submit" id="submit" class="button-primary" value="<?php _e('Add New Exception', 'ultimate-appointment-scheduling') ?>"  /></p></form>
 
 </div>
 </div>

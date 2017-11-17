@@ -76,7 +76,7 @@
 	$UASP_Appointment_Title_Font = get_option("EWD_UASP_Appointment_Title_Font");
 	$UASP_Appointment_Title_Font_Size = get_option("EWD_UASP_Appointment_Title_Font_Size");
 	$UASP_Appointment_Title_Font_Color = get_option("EWD_UASP_Appointment_Title_Font_Color");
-	$UASP_Appointment_Label_Font = get_option("EWD_UASP_Appointment_Label_Font");
+	$UASP_Appointment_Label_Font_Family = get_option("EWD_UASP_Appointment_Label_Font_Family");
 	$UASP_Appointment_Label_Font_Size = get_option("EWD_UASP_Appointment_Label_Font_Size");
 	$UASP_Appointment_Block_Color = get_option("EWD_UASP_Appointment_Block_Color");
 	$UASP_Appointment_Block_Margin = get_option("EWD_UASP_Appointment_Block_Margin");
@@ -123,7 +123,6 @@
 <div class="uasp-options-page-tabbed-content">
 
 <form method="post" action="admin.php?page=EWD-UASP-options&DisplayPage=Settings&Action=EWD_UASP_UpdateOptions">
-<?php wp_nonce_field( 'EWD_UASP_Admin_Nonce', 'EWD_UASP_Admin_Nonce' );  ?>
 <div id='Basic' class='uasp-option-set'>
 <h2 id='label-basic-options' class='uasp-options-page-tab-title'>Basic Options</h2>
 <table class="form-table">
