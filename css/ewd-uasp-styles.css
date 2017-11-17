@@ -1,0 +1,279 @@
+.ewd-uasp-hidden {
+  display:none;
+}
+
+.ewd-uasp-clear {
+  clear:both;
+}
+
+.ewd-uasp-dropdown-appointment-selector *{
+  box-sizing: border-box;
+}
+
+/*Content Fields*/
+
+.ewd-uasp-dropdown-appointment-selector input[type="text"] {
+	padding: 0 !important;
+}
+.ewd-uasp-das-field {
+	margin-top: 10px;
+  	padding: 0px !important;
+}
+.ewd-uasp-das-input-label {
+    margin-bottom: 10px;
+}
+
+.ewd-uasp-appointment-message {
+  margin: 5px;
+}
+
+.ewd-uasp-login-option {
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+#ewd-uasp-facebook-login {
+    margin-left: -6px;
+}
+
+
+/****************
+SIGN UP CONTAINER
+*****************/
+.ewd-uasp-das-registrationform {
+    border: 2px solid #66A3C2;
+    float: left;
+    position: relative;
+    height: 375px;
+  	margin-right: 2%;
+  	margin-bottom: 20px;
+    width: 49%;
+
+}
+.ewd-uasp-das-registrationform-label {
+    color: white;
+    font-size: 2.3em;
+    background-color: #66A3C2;
+  height: 65px;
+    padding: 20px 5px;
+}
+.ewd-uasp-das-registrationform-content {
+	padding: 10px;
+}
+.registration-field-title {
+	margin-bottom: 10px;
+}
+
+/***********************
+CHOOSE SERVICE CONTAINER
+************************/
+.ewd-uasp-das-service {
+	border: 2px solid #006699;
+	float: left;
+	position: relative;
+	height: 375px;
+  	margin-bottom: 20px;
+    width: 49%;
+}
+.ewd-uasp-das-service-label {
+    color: white;
+    font-size: 2.3em;
+    background-color: #006699;
+ height: 65px;
+    padding: 20px 5px;
+}
+.ewd-uasp-das-service-content {
+	padding: 10px;
+}
+.ewd-uasp-das-select {
+    width: 100%;
+    border: 1px solid lightgray !important;
+  	margin: 0 0 0 0 !important;
+  	border-radius: 0px !important;
+  	background-color: white !important;
+}
+
+
+/*************************
+FIND APPOINTMENT CONTAINER
+**************************/
+.ewd-uasp-das-findappointment {
+    width: 100%;
+    border: 2px solid #003D5C;
+    float: left;
+    position: relative;
+    min-height: 375px;
+  	margin-bottom: 20px;
+}
+.ewd-uasp-das-findappointment-label {
+    color: white;
+    font-size: 2.3em;
+    background-color: #003D5C;
+ height: 65px;
+    padding: 20px 5px;
+}
+.ewd-uasp-das-findappointment-content {
+	padding: 10px;
+}
+.ewd-uasp-das-button-container {
+	width: 100%;
+}
+#ewd-uasp-das-find-appointment {
+	background-color: #003D5C;
+	border: 0px;
+	height: 35px;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: white;
+	float: right;
+	cursor: pointer;
+}
+
+/*Appointments output*/
+#ewd-uasp-das-appointment-times {
+	clear:both;
+}
+.ewd-uasp-das-appointment-listing {
+  float: left;
+  margin-top:5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  -o-transition:.25s;
+  -ms-transition:.25s;
+  -moz-transition:.25s;
+  -webkit-transition:.25s;
+  transition:.25s;
+}
+.ewd-uasp-das-appointment-listing:hover {
+	background-color: #003D5C;
+}
+.ewd-uasp-das-appointment-listing > .ewd-uasp-das-appointment-link {
+	-o-transition:.25s;
+  	-ms-transition:.25s;
+  	-moz-transition:.25s;
+  	-webkit-transition:.25s;
+  	transition:.25s;
+}
+.ewd-uasp-das-appointment-listing:hover > .ewd-uasp-das-appointment-link {
+	color: white;
+}
+.ewd-uasp-selected-appointment-time {
+	background-color: #003D5C;
+}
+.ewd-uasp-selected-appointment-time > a {
+	color:white;
+}
+.ewd-uasp-das-appointments-provider-label {
+	margin-bottom: 10px;
+}
+.ewd-uasp-das-available-appointments {
+	min-height: 84px;
+	border: 1px solid lightgray;
+  	margin-bottom: 10px;
+}
+.ewd-uasp-das-appointment-link {
+	color: #003D5C;
+  padding: 10px 20px;
+}
+
+
+/*Date picker*/
+input[type=date]::-webkit-calendar-picker-indicator {
+	color: #003D5C;
+  	background-color: white;
+}
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+
+
+/***********
+BOOK BUTTON
+***********/
+.uasp-pure-control-group {
+  float: right;
+  margin-bottom: 12px;
+}
+.uasp-pure-control-group label {
+  float: left;
+  width: auto;
+  margin-right: 24px;
+}
+.uasp-pure-control-group input[type='text'] {
+  width: 150px;
+  float: left;
+}
+
+
+/***********
+BOOK BUTTON
+***********/
+.ewd-uasp-das-book-button {
+  	clear: both;
+  	background-color: #003D5C !important;
+    position: relative;
+    left: 559px;
+    border-radius: 0px !important;
+}
+
+
+
+/***********
+NEW APPOINTMENT CALENDAR
+***********/
+#ewd-uasp-screen-background {
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  background: #888;
+  opacity: 0.7;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+}
+#ewd-uasp-time-select {
+  position: fixed;
+  z-index: 101;
+  background: rgb(240,240,240);
+  padding: 32px;
+  width: 500px;
+  height: 200px;
+  top: calc(50vh - 100px);
+  left: calc(50% - 250px);
+}
+#ewd-uasp-time-select div {
+  color: #111;
+  margin-bottom: 7px;
+}
+#ewd-uasp-time-select div select {
+  width: auto;
+}
+#ewd-uasp-time-select div#ewd-uasp-select-time-button {
+  cursor: pointer;
+  padding: 6px 9px;
+  background: #111;
+  color: #fff;
+  width: auto;
+  float: left;
+  border-radius: 3px;
+  transition: background .3s;
+}
+#ewd-uasp-time-select div#ewd-uasp-select-time-button:hover {
+  background: #555;
+}
+
+
+/**************
+SMALLER SCREENS
+***************/
+@media (max-width: 800px) {
+  .ewd-uasp-das-registrationform, .ewd-uasp-das-service, .ewd-uasp-das-findappointment {
+    width:100%;
+    margin:5px auto;
+  }
+	  .ewd-uasp-das-book-button{
+  		left: 0px;
+	}
+}
